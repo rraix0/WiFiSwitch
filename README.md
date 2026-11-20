@@ -1,6 +1,13 @@
 # WiFi-Switch-for-electrical-devices
 Small esp8684 based circuit controlling switches via WiFi and physical button
 
+<p align="center">
+     <img src="./assets/preview_1.jpg" alt="Preview 1" width="1000px">
+   </p>
+   <p align="center">
+     <img src="./assets/preview_2.jpg" alt="Preview 2" width="1000px">
+   </p>
+
 ## Table of contents
 
 - [Features](#features)
