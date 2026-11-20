@@ -3,11 +3,11 @@
 #include "esp_wifi.h"
 #include "esp_sleep.h"
 
-
 // CONFIG :
-#define CONNECTION_TIMEOUT 5
 #define DEEP_SLEEP_DURATION_NO_WIFI 10
 #define DEEP_SLEEP_DURATION 10
+
+#define CONNECTION_TIMEOUT 5
 
 const char *ssid = ""; // Your WiFi ssid (name)
 const char *password = ""; // Your WiFi passowrd
@@ -18,11 +18,11 @@ IPAddress subnet(255, 255, 255, 0); // Mask
 IPAddress primaryDNS(1, 1, 1, 1); // Primary DNS
 IPAddress secondaryDNS(1, 0, 0, 1); // Secondary DNS
 
-WebServer server(80);
+WebServer server(80); // HTTP server port, default 80
 
 const int PIN_COUNT = 5; // Amount of output pins
 
-// {0, 1, 2, 3, 18, 19, 20} usable pin numbers, use as many as you need
+// {0, 1, 2, 3, 18, 19, 20} ESP8684 usable pin numbers, use as many as you need. Other boards might have other usable pins
 const int OUTPUT_PINS[PIN_COUNT] = {2, 3, 18, 19, 20}; // Gpio numbers used as output, their amount must be equal to `PIN_COUNT`
 bool OUTPUT_STATUS[PIN_COUNT] = {false, false, false, false, false}; // Default output pins status, amount must be equal to `PIN_COUNT`
 
@@ -30,11 +30,15 @@ const int SWITCH_COUNT = 2; // Amount of physical buttons
 const int SWITCH_PINS[SWITCH_COUNT] = {6, 7}; // Switch pins - ORDER MATTERS - FIRST SWITCH = FIRST OUTPUT_PIN
 
 const int CONFIRM_THRESHOLD = 3; // Amount of button checks before activation - every check happens every 25ms - In case of error like when the high voltage wires induce switch wires.
-unsigned long lastActivitySwitch[SWITCH_COUNT] = {0, 0};
-int switchConfirmCount[SWITCH_COUNT] = {0, 0};
+
+// END of config
 
 
-// Replacements for removed FastLED EVERY_N macros
+
+
+unsigned long lastActivitySwitch[SWITCH_COUNT] = {0};
+int switchConfirmCount[SWITCH_COUNT] = {0};
+
 unsigned long lastWifiCheck = 0;
 unsigned long lastSwitchCheck = 0;
 
